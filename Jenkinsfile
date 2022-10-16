@@ -78,7 +78,6 @@ pipeline {
         // 이미지 태그 변경 후 메인 브랜치에 push
         sh "git config --global user.email ${gitEmail}"
         sh "git config --global user.name ${gitName}"
-        sh "git checkout jeonj"
         sh "sed -i 's/realmytrip:.*/realmytrip:${currentBuild.number}/g' argocd/values.yaml"
         sh "git add ."
         sh "git commit -m 'fix:${dockerHubRegistry} ${currentBuild.number} image versioning'"
