@@ -18,12 +18,12 @@ pipeline {
       // steps 가 실패할 경우에는 failure 를 실행하고 성공할 경우에는 success를 실행한다.
       post {
         failure {
-          echo 'Repository clone failure' 
-          slackSend (color: '#FF0000', message: "FAILED: Repository clone failure")
+          echo 'Repository Clone Failure' 
+          slackSend (color: '#FF0000', message: "FAILED: Repository Clone Failure")
         }
         success {
-          echo 'Repository clone success' 
-          slackSend (color: '#0AC9FF', message: "SUCCESS: Repository clone success")
+          echo 'Repository Clone Success' 
+          slackSend (color: '#0AC9FF', message: "SUCCESS: Repository Clone Success")
         }
       }
     }
@@ -74,7 +74,7 @@ pipeline {
       }
     }
 
-    stage('K8s Manifest Update') {
+    stage('Kubernetes Manifest Update') {
       steps {
         // git 계정 로그인, 해당 레포지토리의 main 브랜치에서 클론
         git credentialsId: githubCredential,
@@ -95,12 +95,12 @@ pipeline {
       }
       post {
         failure {
-          echo 'K8s Manifest Update failure'
-          slackSend (color: '#FF0000', message: "FAILED: K8S Manifest Update '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+          echo 'Kubernetes Manifest Update failure'
+          slackSend (color: '#FF0000', message: "FAILED: Kubernetes Manifest Update '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
          }
         success {
-          echo 'K8s Manifest Update success'
-          slackSend (color: '#0AC9FF', message: "SUCCESS: K8S Manifest Update '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+          echo 'Kubernetes Manifest Update success'
+          slackSend (color: '#0AC9FF', message: "SUCCESS: Kubernetes Manifest Update '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
           }
       }
     }
