@@ -19,9 +19,11 @@ pipeline {
       post {
         failure {
           echo 'Repository clone failure' 
+          //slackSend (color: '#FF0000', message: "FAILED: Repository clone failure")
         }
         success {
           echo 'Repository clone success' 
+          //slackSend (color: '#0AC9FF', message: "SUCCESS: Repository clone success")
         }
       }
     }
@@ -35,10 +37,12 @@ pipeline {
       // 성공, 실패 시 Slack에 알림 오도록 설정
       post {
         failure {
-          echo 'Docker image build failure'         
+          echo 'Docker image build failure'
+          //slackSend (color: '#FF0000', message: "FAILED: Docker Image Build '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")     
         }
         success {
           echo 'Docker image build success'
+          //slackSend (color: '#0AC9FF', message: "SUCCESS: Docker Image Build '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         }
       }
     }  
@@ -58,17 +62,19 @@ pipeline {
         failure {
           echo 'Docker Image Push failure'
           sh "docker rmi ${dockerHubRegistry}:${currentBuild.number}"
-          sh "docker rmi ${dockerHubRegistry}:latest"         
+          sh "docker rmi ${dockerHubRegistry}:latest"
+          //slackSend (color: '#FF0000', message: "FAILED: Docker Image Push '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         }
         success {
           echo 'Docker Image Push success'
           sh "docker rmi ${dockerHubRegistry}:${currentBuild.number}"
-          sh "docker rmi ${dockerHubRegistry}:latest"       
+          sh "docker rmi ${dockerHubRegistry}:latest"
+          //slackSend (color: '#0AC9FF', message: "SUCCESS: Docker Image Push '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         }
       }
     }
 
-    stage('K8S Manifest Update') {
+    stage('K8s Manifest Update') {
       steps {
         // git 계정 로그인, 해당 레포지토리의 main 브랜치에서 클론
         git credentialsId: githubCredential,
@@ -89,10 +95,12 @@ pipeline {
       }
       post {
         failure {
-          echo 'K8S Manifest Update failure'
+          echo 'K8s Manifest Update failure'
+          //slackSend (color: '#FF0000', message: "FAILED: K8S Manifest Update '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
          }
         success {
           echo 'K8s Manifest Update success'
+          //slackSend (color: '#0AC9FF', message: "SUCCESS: K8S Manifest Update '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
           }
       }
     }
