@@ -19,11 +19,11 @@ pipeline {
       post {
         failure {
           echo 'Repository clone failure' 
-          //slackSend (color: '#FF0000', message: "FAILED: Repository clone failure")
+          slackSend (color: '#FF0000', message: "FAILED: Repository clone failure")
         }
         success {
           echo 'Repository clone success' 
-          //slackSend (color: '#0AC9FF', message: "SUCCESS: Repository clone success")
+          slackSend (color: '#0AC9FF', message: "SUCCESS: Repository clone success")
         }
       }
     }
@@ -38,11 +38,11 @@ pipeline {
       post {
         failure {
           echo 'Docker image build failure'
-          //slackSend (color: '#FF0000', message: "FAILED: Docker Image Build '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")     
+          slackSend (color: '#FF0000', message: "FAILED: Docker Image Build '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")     
         }
         success {
           echo 'Docker image build success'
-          //slackSend (color: '#0AC9FF', message: "SUCCESS: Docker Image Build '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+          slackSend (color: '#0AC9FF', message: "SUCCESS: Docker Image Build '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         }
       }
     }  
@@ -63,13 +63,13 @@ pipeline {
           echo 'Docker Image Push failure'
           sh "docker rmi ${dockerHubRegistry}:${currentBuild.number}"
           sh "docker rmi ${dockerHubRegistry}:latest"
-          //slackSend (color: '#FF0000', message: "FAILED: Docker Image Push '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+          slackSend (color: '#FF0000', message: "FAILED: Docker Image Push '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         }
         success {
           echo 'Docker Image Push success'
           sh "docker rmi ${dockerHubRegistry}:${currentBuild.number}"
           sh "docker rmi ${dockerHubRegistry}:latest"
-          //slackSend (color: '#0AC9FF', message: "SUCCESS: Docker Image Push '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+          slackSend (color: '#0AC9FF', message: "SUCCESS: Docker Image Push '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         }
       }
     }
@@ -96,11 +96,11 @@ pipeline {
       post {
         failure {
           echo 'K8s Manifest Update failure'
-          //slackSend (color: '#FF0000', message: "FAILED: K8S Manifest Update '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+          slackSend (color: '#FF0000', message: "FAILED: K8S Manifest Update '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
          }
         success {
           echo 'K8s Manifest Update success'
-          //slackSend (color: '#0AC9FF', message: "SUCCESS: K8S Manifest Update '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+          slackSend (color: '#0AC9FF', message: "SUCCESS: K8S Manifest Update '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
           }
       }
     }
