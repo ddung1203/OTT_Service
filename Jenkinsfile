@@ -29,9 +29,8 @@ pipeline {
     stage('Docker Image Build') {
       steps {
         // 도커 이미지를 빌드하며 빌드한 횟수에 따라 순차적으로 증가하는 젠킨스 자체 변수를 태그로 자동 지정한다.
-        sh "cd realmytrip"
-        sh "docker build -t ${dockerHubRegistry}:${currentBuild.number}"
-        sh "docker build -t ${dockerHubRegistry}:latest"
+        sh "docker build ./realmytrip -t ${dockerHubRegistry}:${currentBuild.number}"
+        sh "docker build ./realmytrip -t ${dockerHubRegistry}:latest"
       }
       // 성공, 실패 시 Slack에 알림 오도록 설정
       post {
