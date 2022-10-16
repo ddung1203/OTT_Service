@@ -82,10 +82,7 @@ pipeline {
         sh "sed -i 's/realmytrip:.*/realmytrip:${currentBuild.number}/g' argocd/values.yaml"
         sh "git add ."
         sh "git commit -m 'fix:${dockerHubRegistry} ${currentBuild.number} image versioning'"
-        sh "git branch -M jeonj"
-        sh "git remote remove origin"
-        sh "git remote add origin git@github.com:ddung1203/OTT_Service.git"
-        sh "git push -u origin jeonj"
+        sh "git push origin jeonj"
       }
       post {
         failure {
