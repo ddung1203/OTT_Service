@@ -29,8 +29,8 @@ pipeline {
     stage('Docker Image Build') {
       steps {
         // 도커 이미지를 빌드하며 빌드한 횟수에 따라 순차적으로 증가하는 젠킨스 자체 변수를 태그로 자동 지정한다.
-        sh "sudo docker build ./realmytrip -t ${dockerHubRegistry}:${currentBuild.number}"
-        sh "sudo docker build ./realmytrip -t ${dockerHubRegistry}:latest"
+        sh "docker build ./realmytrip -t ${dockerHubRegistry}:${currentBuild.number}"
+        sh "docker build ./realmytrip -t ${dockerHubRegistry}:latest"
       }
       // 성공, 실패 시 Slack에 알림 오도록 설정
       post {
@@ -47,8 +47,8 @@ pipeline {
       steps {
         // 젠킨스에 등록한 크리덴셜로 도커 허브에 이미지 push
         withDockerRegistry(credentialsId: dockerHubRegistryCredential, url: '') {
-          sh "sudo docker push ${dockerHubRegistry}:${currentBuild.number}"
-          sh "sudo docker push ${dockerHubRegistry}:latest"
+          sh "docker push ${dockerHubRegistry}:${currentBuild.number}"
+          sh "docker push ${dockerHubRegistry}:latest"
           // 10초 후에 다음 작업을 이어나가도록 함
           sleep 10
         } 
@@ -57,13 +57,13 @@ pipeline {
       post {
         failure {
           echo 'Docker Image Push failure'
-          sh "sudo docker rmi ${dockerHubRegistry}:${currentBuild.number}"
-          sh "sudo docker rmi ${dockerHubRegistry}:latest"         
+          sh "docker rmi ${dockerHubRegistry}:${currentBuild.number}"
+          sh "docker rmi ${dockerHubRegistry}:latest"         
         }
         success {
           echo 'Docker Image Push success'
-          sh "sudo docker rmi ${dockerHubRegistry}:${currentBuild.number}"
-          sh "sudo docker rmi ${dockerHubRegistry}:latest"       
+          sh "docker rmi ${dockerHubRegistry}:${currentBuild.number}"
+          sh "docker rmi ${dockerHubRegistry}:latest"       
         }
       }
     }
