@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('Checkout Application Git Branch') {
       steps {
-        checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: githubCredential, url: 'https://github.com/ddung1203/OTT_Service.git']]])
+        checkout([$class: 'GitSCM', branches: [[name: '*/jeonj']], extensions: [], userRemoteConfigs: [[credentialsId: githubCredential, url: 'https://github.com/ddung1203/OTT_Service.git']]])
       }
       // steps 가 끝날 경우 실행한다.
       // steps 가 실패할 경우에는 failure 를 실행하고 성공할 경우에는 success를 실행한다.
