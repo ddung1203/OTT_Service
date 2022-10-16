@@ -84,6 +84,7 @@ pipeline {
         sh "git branch -M jeonj"
         sh "git remote remove origin"
         sh "git remote add origin git@github.com:ddung1203/OTT_Service.git"
+        sh "git checkout jeonj"
         sh "git push -u origin jeonj"
       }
       post {
