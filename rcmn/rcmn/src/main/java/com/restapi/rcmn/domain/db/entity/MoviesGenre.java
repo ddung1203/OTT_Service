@@ -8,17 +8,17 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Builder
-@Table(name = "movies_tag")
-public class MoviesTag {
+@Table(name = "movies_genre")
+public class MoviesGenre {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "movie_tag_idx")
-    private Long moviesTagIdx;
+    @Column(name = "movie_genre")
+    private Long moviesGenre;
 
-    @JoinColumn(name = "tag_idx")
-    @ManyToOne(targetEntity = Tag.class, fetch = FetchType.LAZY)
-    private Tag tag;
-
-    @JoinColumn(name = "movies_idx")
     @ManyToOne(targetEntity = Movies.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "movies_idx")
     private Movies movies;
+
+    @ManyToOne(targetEntity = Genre.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "genre_idx")
+    private Genre genre;
 }

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
+
 @RestController
 @RequestMapping("member")
 @RequiredArgsConstructor
@@ -22,5 +24,10 @@ public class MemberController {
     ) {
         memberService.signUp(dto.toEntity());
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "성공"));
+    }
+
+    @PostMapping(value = "test")
+    public String memberTest() {
+        return "member test";
     }
 }

@@ -1,13 +1,17 @@
 package com.restapi.rcmn.domain.db.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.Builder;
+import lombok.Getter;
+
+import javax.persistence.*;
 
 @Entity
+@Getter
+@Builder
+@Table(name = "genre")
 public class Genre {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "genre_idx")
     private Long genreIdx;
 
     @Column(name = "genre")

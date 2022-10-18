@@ -29,8 +29,8 @@ dependencies {
 	implementation 'mysql:mysql-connector-java'
 
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
+	runtimeOnly 'com.h2database:h2'
 
 	//	================== swagger-ui start ==================
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
