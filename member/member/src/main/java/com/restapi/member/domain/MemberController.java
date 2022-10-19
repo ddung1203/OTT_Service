@@ -4,10 +4,7 @@ import com.restapi.member.common.model.BaseResponseBody;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 
@@ -26,7 +23,7 @@ public class MemberController {
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "성공"));
     }
 
-    @PostMapping(value = "test")
+    @GetMapping(value = "test")
     public String memberTest() {
         return "member test";
     }
