@@ -17,7 +17,7 @@ spring:
     database: mysql
     show_sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       naming:
         strategy: org.hibernate.cfg.ImprovedNamingStrategy
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
@@ -25,11 +25,6 @@ spring:
 
   application:
     name: MEMBER-SERVICE
-
-eureka:
-  client:
-    service-url:
-      default-zone: http://localhost:8781/eureka
 
   instance:
     instance-id: ${spring.application.name}:${random.value}
