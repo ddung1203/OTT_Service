@@ -16,6 +16,9 @@ spec:
       - name: {{ .Values.app_name }}
         image: {{ .Values.app_image }}
         imagePullPolicy: Always
+        envFrom:
+          - configMapRef:
+            name: configmap
         ports:
         - containerPort: 9560
         resources:
