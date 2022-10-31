@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+        - name: flask
+          image: ddung1203/demo:flask
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 5000
+          resources:
+            requests:
+              cpu: "300m"
+              memory: "300Mi"
+            limits:
+              cpu: "300m"
+              memory: "300Mi"
