@@ -42,8 +42,8 @@ spec:
   selector:
     app: {{ .Values.app_label }}
   ports:
-    - port: 80
-      targetPort: 3000
+    - port: 9009
+      targetPort: 9009
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
