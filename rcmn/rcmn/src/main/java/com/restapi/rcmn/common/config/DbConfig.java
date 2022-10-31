@@ -10,20 +10,35 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.sql.DataSource;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Configuration
-public class JpaConfig {
-    @PersistenceContext
-    EntityManager entityManager;
+public class DbConfig {
+
+    private String driverClassName = "com.mysql.cj.jdbc.Driver";
+    private String datasource = System.getenv("datasource");
+    private String username = System.getenv("db_username");
+    private String password = System.getenv("db_password");
+
+    @Bean
+    public DataSource getDataSource() {
+        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+        dataSourceBuilder.driverClassName(driverClassName);
+        dataSourceBuilder.url(datasource);
+        dataSourceBuilder.username(username);
+        dataSourceBuilder.password(password);
+        return dataSourceBuilder.build();
+    }
 
     @Bean
     @Primary

@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 @RequiredArgsConstructor
 public class MovieRepoTest {
 
-    private final MoviesMemberRepository moviesMemberRepository;
 
     @Test
     public void 영화_레포지토리_findByMovieName_테스트() {
