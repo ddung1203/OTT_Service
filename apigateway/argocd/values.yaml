@@ -1,3 +1,3 @@
 app_name: api-gateway-app-deployment
 app_label: api-gateway-app
-app_image: ddung1203/api-gateway:6
+app_image: ddung1203/api-gateway:8
