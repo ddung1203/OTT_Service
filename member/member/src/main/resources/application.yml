@@ -6,13 +6,6 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
-  datasource:
-    url: ${datasource}
-    driverClassName: com.mysql.cj.jdbc.Driver
-    username: ${db_username}
-    password: ${db_password}
-
-
   jpa:
     database: mysql
     show_sql: true
