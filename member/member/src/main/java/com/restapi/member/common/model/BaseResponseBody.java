@@ -14,10 +14,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class BaseResponseBody {
     @ApiModelProperty(value = "응답 메시지", example = "성공")
-    public String message;
+    private String message;
 
     @ApiModelProperty(value = "응답 코드", example = "200")
-    public int statusCode;
+    private int statusCode;
 
     public static BaseResponseBody of(int statusCode, String message) {
         BaseResponseBody body = new BaseResponseBody();

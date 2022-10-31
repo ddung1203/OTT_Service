@@ -1,12 +1,13 @@
 package com.restapi.member.domain;
 
 import com.restapi.member.common.model.BaseResponseBody;
+import com.restapi.member.domain.db.entity.Member;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.File;
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequestMapping("member")
@@ -16,15 +17,20 @@ public class MemberController {
     private final MemberServiceImpl memberService;
 
     @PostMapping(value = "insert_member")
-    public ResponseEntity<? extends BaseResponseBody> insertCompany(
-            @RequestBody MemberDto.SingUpReq dto
+    public ResponseEntity<BaseResponseBody> insert(
+            @RequestBody MemberDto.SingUpReq req
     ) {
-        memberService.signUp(dto.toEntity());
-        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "성공"));
+        memberService.signUp(req.toEntity());
+        return ResponseEntity.ok().body(BaseResponseBody.of(200, "성공"));
     }
 
-    @GetMapping(value = "test")
-    public String memberTest() {
-        return "member test";
+    @PostMapping(value = "login")
+    public ResponseEntity<MemberDto.LoginRes> login(
+            @RequestBody MemberDto.LoginReq req
+    ) {
+        MemberDto.LoginRes resBody = memberService.login(req.toEntity());
+
+        return ResponseEntity.ok().body(resBody);
     }
+
 }
