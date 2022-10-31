@@ -16,15 +16,18 @@ spec:
       - name: {{ .Values.app_name }}
         image: {{ .Values.app_image }}
         imagePullPolicy: Always
+        envFrom:
+          - configMapRef:
+              name: configmap
         ports:
         - containerPort: 9009
         resources:
           requests:
-            cpu: "1000m"
-            memory: "1500M"
+            cpu: "500m"
+            memory: "700M"
           limits:
-            cpu: "1000m"
-            memory: "1500M"
+            cpu: "500m"
+            memory: "700M"
   strategy:
     canary:
       maxSurge: "25%"

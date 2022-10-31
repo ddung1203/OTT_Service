@@ -20,11 +20,11 @@ spec:
         - containerPort: 8080
         resources:
           requests:
-            cpu: "1000m"
-            memory: "1500M"
+            cpu: "500m"
+            memory: "700M"
           limits:
-            cpu: "1000m"
-            memory: "1500M"
+            cpu: "500m"
+            memory: "700M"
   strategy:
     canary:
       maxSurge: "25%"
