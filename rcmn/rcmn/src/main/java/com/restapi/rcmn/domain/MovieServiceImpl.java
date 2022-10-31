@@ -27,13 +27,15 @@ public class MovieServiceImpl {
     public List<Movies> rcmnMovies(long memberId) {
         StringBuilder sb = new StringBuilder("");
 
-        List<MoviesMember> moviesMemberList = moviesMemberRepository.findByMemberId(memberId).stream()
+        List<String> movieTitleList = moviesMemberRepository.findByMemberId(memberId).stream()
                 .sorted(Comparator.comparing(MoviesMember::getUpdateDt))
                 .limit(5)
+                .map(MoviesMember::getMovies)
+                .map(Movies::getMoviesTitle)
                 .collect(Collectors.toList());
 
-        for (MoviesMember mm : moviesMemberList) {
-            sb.append("@").append(mm.getMovies().getMoviesTitle());
+        for (String movieTitle : movieTitleList) {
+            sb.append("@").append(movieTitle);
         }
 
         sb.deleteCharAt(0);
