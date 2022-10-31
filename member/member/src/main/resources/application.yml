@@ -7,17 +7,17 @@ spring:
       matching-strategy: ant_path_matcher
 
   datasource:
-    url: jdbc:mysql://localhost:3306/test?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: ${datasource}
     driverClassName: com.mysql.cj.jdbc.Driver
-    username: root
-    password: admin
+    username: ${db_username}
+    password: ${db_password}
 
 
   jpa:
     database: mysql
     show_sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       naming:
         strategy: org.hibernate.cfg.ImprovedNamingStrategy
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
@@ -25,11 +25,6 @@ spring:
 
   application:
     name: MEMBER-SERVICE
-
-eureka:
-  client:
-    service-url:
-      default-zone: http://localhost:8781/eureka
 
   instance:
     instance-id: ${spring.application.name}:${random.value}

@@ -1,25 +1,52 @@
 server:
   port : 8080
 
-
 spring:
-  config:
-    import: "optional:configserver:http://localhost:8888"
 
+  zipkin:
+    enabled: false
   application:
     name: apigateway-service
+    instance_id:
+
   cloud:
+    config:
+      enabled: false
+    discovery:
+      enabled: false
     gateway:
       routes:
         - id: member-service
+#          uri: http://member-np.default:9560/
           uri: http://localhost:9560/
           predicates:
             - Path=/member/**
+#          filter:
+#            - AuthorizationFilter
+
         - id: movie-service
+#          uri: http://movie-np.default:9009/
           uri: http://localhost:9009/
           predicates:
             - Path=/movie/**
+          filters:
+            - RewritePath=/movie/?(?<segment>.*), /$\{segment}
+            - AuthorizationFilter
+eureka:
+  client:
+    fetch-registry: false # 유레카 클라이언트 활성화
+    register-with-eureka: false # 유레카 클라이언트 활성화
+    service-url:
+      defaultZone: http://localhost:8761/eureka # 유레카 클라이언트로 등록
 
+#eureka:
+#  instance:
+#    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: ${eureka.client.serviceUrl.defaultZone}
 #spring:
 #  cloud:
 #    gateway:
