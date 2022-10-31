@@ -17,16 +17,15 @@ spring:
     gateway:
       routes:
         - id: member-service
-#          uri: http://member-np.default:9560/
-          uri: http://localhost:9560/
+          uri: http://member-np.default:9560/
           predicates:
             - Path=/member/**
-#          filter:
+          filters:
+            - RewritePath=/movie/?(?<segment>.*), /$\{segment}
 #            - AuthorizationFilter
 
         - id: movie-service
-#          uri: http://movie-np.default:9009/
-          uri: http://localhost:9009/
+          uri: http://movie-np.default:9009/
           predicates:
             - Path=/movie/**
           filters:
@@ -38,42 +37,3 @@ eureka:
     register-with-eureka: false # 유레카 클라이언트 활성화
     service-url:
       defaultZone: http://localhost:8761/eureka # 유레카 클라이언트로 등록
-
-#eureka:
-#  instance:
-#    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-#  client:
-#    register-with-eureka: true
-#    fetch-registry: true
-#    service-url:
-#      defaultZone: ${eureka.client.serviceUrl.defaultZone}
-#spring:
-#  cloud:
-#    gateway:
-#      default-filters:
-#        args:
-#          baseMessage: Spring Cloud Gateway GlobalFilter
-#          preLogger: true
-#          postLogger: true
-#      routes:
-#        - id: member-service
-##          uri: lb://member
-#          uri: http://localhost:8081/
-#          predicates:
-#            - Path=/member/**
-#          filters:
-#            - name: MemberFilter
-#              args:
-#                baseMessage: Spring Cloud Gateway MemberFilter
-#                preLogger: true
-#                postLogger: true
-#        - id: movies-service
-#          uri: http://localhost:8082/
-#          predicates:
-#            - Path=/movies/**
-#          filters:
-#            - name: MemberFilter
-#              args:
-#                baseMessage: Spring Cloud Gateway MemberFilter
-#                preLogger: true
-#                postLogger: true

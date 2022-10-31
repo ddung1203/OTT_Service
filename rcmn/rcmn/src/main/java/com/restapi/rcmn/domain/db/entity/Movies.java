@@ -1,13 +1,15 @@
 package com.restapi.rcmn.domain.db.entity;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Builder
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "movies")
 public class Movies {
     @Id
@@ -20,4 +22,11 @@ public class Movies {
 
     @Column(name = "overview", length = 1024)
     private String overview;
+
+    @Column(name = "thumbnail")
+    private String thumbnail;
+
+    @Column(name = "s3url")
+    private String s3url;
 }
+
