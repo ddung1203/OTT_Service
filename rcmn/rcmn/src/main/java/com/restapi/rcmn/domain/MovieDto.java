@@ -4,6 +4,7 @@ import com.restapi.rcmn.common.model.BaseResponseBody;
 import com.restapi.rcmn.domain.db.entity.Movies;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,6 @@ public class MovieDto {
     @Data
     @Builder
     public static class MovieRcmnRes extends BaseResponseBody {
-        private Long movieIdx;
         private String thumbnail;
         private String fileAddress;
         private String moviesTitle;
@@ -23,8 +23,7 @@ public class MovieDto {
             List<MovieRcmnRes> resList = new ArrayList<>();
 
             for (Movies movie : movieList) {
-                resList.add(MovieRcmnRes.builder()
-                        .movieIdx(movie.getMovieIdx())
+                    resList.add(MovieRcmnRes.builder()
                         .moviesTitle(movie.getMoviesTitle())
                         .overView(movie.getOverview())
                         .build()
