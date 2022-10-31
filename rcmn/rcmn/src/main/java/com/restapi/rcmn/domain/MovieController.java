@@ -29,9 +29,4 @@ public class MovieController {
         return ResponseEntity.ok().body(MovieDto.MovieRcmnRes.createMovieList(movieList));
     }
 
-    @GetMapping(value = "test")
-    public ResponseEntity<?> test() {
-        movieService.testJpqlTest();
-        return ResponseEntity.ok().body(BaseResponseBody.of(200, "ok"));
-    }
 }
