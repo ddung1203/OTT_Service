@@ -20,7 +20,6 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "member")
 public class Member implements UserDetails {
-
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberIdx;
 

@@ -17,7 +17,7 @@ public class MemberController {
     private final MemberServiceImpl memberService;
 
     @PostMapping(value = "insert_member")
-    public ResponseEntity<? extends BaseResponseBody> insert(
+    public ResponseEntity<BaseResponseBody> insert(
             @RequestBody MemberDto.SingUpReq req
     ) {
         memberService.signUp(req.toEntity());
@@ -25,19 +25,12 @@ public class MemberController {
     }
 
     @PostMapping(value = "login")
-    public ResponseEntity<? extends BaseResponseBody> login(
+    public ResponseEntity<MemberDto.LoginRes> login(
             @RequestBody MemberDto.LoginReq req
     ) {
         MemberDto.LoginRes resBody = memberService.login(req.toEntity());
 
         return ResponseEntity.ok().body(resBody);
-    }
-    @GetMapping(value = "login_test")
-    public String memberTest(
-            @AuthenticationPrincipal @ApiIgnore Member member
-    ) {
-        System.out.println(member.getMemberIdx());
-        return "member test";
     }
 
 }

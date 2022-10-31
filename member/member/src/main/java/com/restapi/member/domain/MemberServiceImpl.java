@@ -19,26 +19,28 @@ public class MemberServiceImpl {
     private final MemberRepository memberRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
-    public Member signUp(Member member){
 
+    public Member signUp(Member member){
         if(memberRepository.findByAuthId(member.getAuthId()).isPresent())
             throw new DuplicateAuthIdException(member.getAuthId());
 
-        Member newMember = memberRepository.save(Member.builder()
+        return memberRepository.save(Member.builder()
                 .authId(member.getAuthId())
                 .password(passwordEncoder.encode(member.getPassword()))
                 .build());
-
-        return newMember;
     }
 
     public MemberDto.LoginRes login(Member member) {
-
-        memberRepository.findByAuthId(member.getAuthId()).orElseThrow(
+        Member loginMember = memberRepository.findByAuthId(member.getAuthId()).orElseThrow(
                 () -> new NotFoundAuthIdException(member.getAuthId())
         );
 
         String token = jwtTokenProvider.createToken(member.getAuthId());
+
+        if (loginMember.getPassword().equals(passwordEncoder.encode(member.getPassword()))) {
+            throw new IllegalArgumentException("잘못된 비밀번호 입니다.");
+        }
+
         return MemberDto.LoginRes.of(member, token);
     }
 }

@@ -43,7 +43,7 @@ public class MemberDto {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @AllArgsConstructor
     @Builder
-    public static class LoginRes extends BaseResponseBody {
+    public static class LoginRes {
         private String token;
 
         private String authId;
