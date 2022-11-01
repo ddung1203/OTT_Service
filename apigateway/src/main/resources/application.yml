@@ -17,7 +17,7 @@ spring:
     gateway:
       routes:
         - id: member-service
-          uri: svc.member-app-deployment:9560/
+          uri: member-app-deployment.default:9560/
 #          uri: http://localhost:9560/
           predicates:
             - Path=/member/**
@@ -26,7 +26,7 @@ spring:
 #            - AuthorizationFilter
 
         - id: movie-service
-          uri: svc.rcmn-app-deployment:9009/
+          uri: rcmn-app-deployment.default:9009/
           predicates:
             - Path=/movie/**
           filters:
