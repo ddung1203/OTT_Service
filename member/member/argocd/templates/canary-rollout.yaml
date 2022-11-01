@@ -23,11 +23,11 @@ spec:
         - containerPort: 9560
         resources:
           requests:
-            cpu: "500m"
-            memory: "700M"
+            cpu: "700m"
+            memory: "900M"
           limits:
-            cpu: "500m"
-            memory: "700M"
+            cpu: "700m"
+            memory: "900M"
   strategy:
     canary:
       maxSurge: "25%"
