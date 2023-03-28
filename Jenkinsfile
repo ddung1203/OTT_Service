@@ -55,7 +55,7 @@ pipeline {
       steps {
         script{
           // 젠킨스에 등록한 크리덴셜로 도커 허브에 이미지 push
-          withDockerRegistry(credentialsId: dockerHubRegistryCredential, url: '') {
+          docker.withRegistry('', credentialsId: dockerHubRegistryCredential) {
           
             app.push("latest")
             // 10초 후에 다음 작업을 이어나가도록 함
