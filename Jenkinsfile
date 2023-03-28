@@ -1,6 +1,11 @@
 pipeline {
   agent any
   
+  // docker 라이브러리 로드
+  options {
+    dockerChk()
+  }
+
   environment {
   dockerHubRegistry = 'ddung1203/realmytrip'
   dockerHubRegistryCredential='dockerhub'
