@@ -30,10 +30,13 @@ pipeline {
 
     stage('Docker Image Build') {
       steps {
-        // 도커 이미지를 빌드하며 빌드한 횟수에 따라 순차적으로 증가하는 젠킨스 자체 변수를 태그로 자동 지정한다.
-        docker.withRegistry("https://registry.hub.docker.com", dockerhub) {
-          def app = docker.build("${dockerHubRegistry}", '.')
+        script{
+          // 도커 이미지를 빌드하며 빌드한 횟수에 따라 순차적으로 증가하는 젠킨스 자체 변수를 태그로 자동 지정한다.
+          docker.withRegistry("https://registry.hub.docker.com", dockerhub) {
+            def app = docker.build("${dockerHubRegistry}", '.')
         }
+      }
+       
       }
       // 성공, 실패 시 Slack에 알림 오도록 설정
       post {
