@@ -32,7 +32,7 @@ pipeline {
       steps {
         script{
           // 도커 이미지를 빌드하며 빌드한 횟수에 따라 순차적으로 증가하는 젠킨스 자체 변수를 태그로 자동 지정한다.
-          dockerImage = docker.build dockerHubRegistry
+          def dockerImage = docker.build dockerHubRegistry
       }
        
       }
